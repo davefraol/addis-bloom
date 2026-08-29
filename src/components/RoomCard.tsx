@@ -17,8 +17,8 @@ export function RoomCard({ room, className }: { room: Room; className?: string }
         aria-hidden="true"
       >
         <ImageReveal
-          src={room.images[0].src}
-          alt={room.images[0].alt}
+          src={cover?.src ?? ""}
+          alt={cover?.alt ?? room.name}
           ratio="aspect-4/5 sm:aspect-3/4"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
