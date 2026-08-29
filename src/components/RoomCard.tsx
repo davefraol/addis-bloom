@@ -6,6 +6,7 @@ import { formatPrice, type Room } from "@/data/rooms";
 import { cn } from "@/lib/utils";
 
 export function RoomCard({ room, className }: { room: Room; className?: string }) {
+  const cover = room.images[0];
   return (
     <article className={cn("group flex h-full flex-col", className)}>
       <Link
