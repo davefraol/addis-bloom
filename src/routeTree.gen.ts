@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExperiencesRouteImport } from './routes/experiences'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as JournalIndexRouteImport } from './routes/journal.index'
 import { Route as RoomsIndexRouteImport } from './routes/rooms.index'
 import { Route as RoomsSlugRouteImport } from './routes/rooms.$slug'
 
@@ -30,6 +31,11 @@ const GalleryRoute = GalleryRouteImport.update({
   path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JournalIndexRoute = JournalIndexRouteImport.update({
+  id: '/journal/',
+  path: '/journal/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RoomsIndexRoute = RoomsIndexRouteImport.update({
   id: '/rooms/',
   path: '/rooms/',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/experiences': typeof ExperiencesRoute
   '/gallery': typeof GalleryRoute
   '/rooms/$slug': typeof RoomsSlugRoute
+  '/journal/': typeof JournalIndexRoute
   '/rooms/': typeof RoomsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/experiences': typeof ExperiencesRoute
   '/gallery': typeof GalleryRoute
   '/rooms/$slug': typeof RoomsSlugRoute
+  '/journal': typeof JournalIndexRoute
   '/rooms': typeof RoomsIndexRoute
 }
 export interface FileRoutesById {
@@ -61,15 +69,23 @@ export interface FileRoutesById {
   '/experiences': typeof ExperiencesRoute
   '/gallery': typeof GalleryRoute
   '/rooms/$slug': typeof RoomsSlugRoute
+  '/journal/': typeof JournalIndexRoute
   '/rooms/': typeof RoomsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/experiences' | '/gallery' | '/rooms/$slug' | '/rooms/'
+  fullPaths:
+    '/' | '/experiences' | '/gallery' | '/rooms/$slug' | '/journal/' | '/rooms/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/experiences' | '/gallery' | '/rooms/$slug' | '/rooms'
+  to: '/' | '/experiences' | '/gallery' | '/rooms/$slug' | '/journal' | '/rooms'
   id:
-    '__root__' | '/' | '/experiences' | '/gallery' | '/rooms/$slug' | '/rooms/'
+    | '__root__'
+    | '/'
+    | '/experiences'
+    | '/gallery'
+    | '/rooms/$slug'
+    | '/journal/'
+    | '/rooms/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +93,7 @@ export interface RootRouteChildren {
   ExperiencesRoute: typeof ExperiencesRoute
   GalleryRoute: typeof GalleryRoute
   RoomsSlugRoute: typeof RoomsSlugRoute
+  JournalIndexRoute: typeof JournalIndexRoute
   RoomsIndexRoute: typeof RoomsIndexRoute
 }
 
@@ -103,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/journal/': {
+      id: '/journal/'
+      path: '/journal'
+      fullPath: '/journal/'
+      preLoaderRoute: typeof JournalIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rooms/': {
       id: '/rooms/'
       path: '/rooms'
@@ -125,6 +149,7 @@ const rootRouteChildren: RootRouteChildren = {
   ExperiencesRoute: ExperiencesRoute,
   GalleryRoute: GalleryRoute,
   RoomsSlugRoute: RoomsSlugRoute,
+  JournalIndexRoute: JournalIndexRoute,
   RoomsIndexRoute: RoomsIndexRoute,
 }
 export const routeTree = rootRouteImport
