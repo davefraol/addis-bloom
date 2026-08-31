@@ -10,15 +10,34 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as BookingRouteImport } from './routes/booking'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ExperiencesRouteImport } from './routes/experiences'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as JournalIndexRouteImport } from './routes/journal.index'
+import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as RoomsIndexRouteImport } from './routes/rooms.index'
 import { Route as RoomsSlugRouteImport } from './routes/rooms.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingRoute = BookingRouteImport.update({
+  id: '/booking',
+  path: '/booking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExperiencesRoute = ExperiencesRouteImport.update({
@@ -36,6 +55,11 @@ const JournalIndexRoute = JournalIndexRouteImport.update({
   path: '/journal/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JournalSlugRoute = JournalSlugRouteImport.update({
+  id: '/journal/$slug',
+  path: '/journal/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RoomsIndexRoute = RoomsIndexRouteImport.update({
   id: '/rooms/',
   path: '/rooms/',
@@ -49,16 +73,24 @@ const RoomsSlugRoute = RoomsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/booking': typeof BookingRoute
+  '/contact': typeof ContactRoute
   '/experiences': typeof ExperiencesRoute
   '/gallery': typeof GalleryRoute
+  '/journal/$slug': typeof JournalSlugRoute
   '/rooms/$slug': typeof RoomsSlugRoute
   '/journal/': typeof JournalIndexRoute
   '/rooms/': typeof RoomsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/booking': typeof BookingRoute
+  '/contact': typeof ContactRoute
   '/experiences': typeof ExperiencesRoute
   '/gallery': typeof GalleryRoute
+  '/journal/$slug': typeof JournalSlugRoute
   '/rooms/$slug': typeof RoomsSlugRoute
   '/journal': typeof JournalIndexRoute
   '/rooms': typeof RoomsIndexRoute
@@ -66,8 +98,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/booking': typeof BookingRoute
+  '/contact': typeof ContactRoute
   '/experiences': typeof ExperiencesRoute
   '/gallery': typeof GalleryRoute
+  '/journal/$slug': typeof JournalSlugRoute
   '/rooms/$slug': typeof RoomsSlugRoute
   '/journal/': typeof JournalIndexRoute
   '/rooms/': typeof RoomsIndexRoute
@@ -75,14 +111,37 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/experiences' | '/gallery' | '/rooms/$slug' | '/journal/' | '/rooms/'
+    | '/'
+    | '/about'
+    | '/booking'
+    | '/contact'
+    | '/experiences'
+    | '/gallery'
+    | '/journal/$slug'
+    | '/rooms/$slug'
+    | '/journal/'
+    | '/rooms/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/experiences' | '/gallery' | '/rooms/$slug' | '/journal' | '/rooms'
+  to:
+    | '/'
+    | '/about'
+    | '/booking'
+    | '/contact'
+    | '/experiences'
+    | '/gallery'
+    | '/journal/$slug'
+    | '/rooms/$slug'
+    | '/journal'
+    | '/rooms'
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/booking'
+    | '/contact'
     | '/experiences'
     | '/gallery'
+    | '/journal/$slug'
     | '/rooms/$slug'
     | '/journal/'
     | '/rooms/'
@@ -90,8 +149,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  BookingRoute: typeof BookingRoute
+  ContactRoute: typeof ContactRoute
   ExperiencesRoute: typeof ExperiencesRoute
   GalleryRoute: typeof GalleryRoute
+  JournalSlugRoute: typeof JournalSlugRoute
   RoomsSlugRoute: typeof RoomsSlugRoute
   JournalIndexRoute: typeof JournalIndexRoute
   RoomsIndexRoute: typeof RoomsIndexRoute
@@ -104,6 +167,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking': {
+      id: '/booking'
+      path: '/booking'
+      fullPath: '/booking'
+      preLoaderRoute: typeof BookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/experiences': {
@@ -127,6 +211,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JournalIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/journal/$slug': {
+      id: '/journal/$slug'
+      path: '/journal/$slug'
+      fullPath: '/journal/$slug'
+      preLoaderRoute: typeof JournalSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rooms/': {
       id: '/rooms/'
       path: '/rooms'
@@ -146,8 +237,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  BookingRoute: BookingRoute,
+  ContactRoute: ContactRoute,
   ExperiencesRoute: ExperiencesRoute,
   GalleryRoute: GalleryRoute,
+  JournalSlugRoute: JournalSlugRoute,
   RoomsSlugRoute: RoomsSlugRoute,
   JournalIndexRoute: JournalIndexRoute,
   RoomsIndexRoute: RoomsIndexRoute,
