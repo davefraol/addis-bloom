@@ -2,7 +2,7 @@ import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, BedDouble, Check, Eye, Maximize, Phone, Users } from "lucide-react";
 
-import { ButtonAnchor, ButtonLink } from "@/components/Button";
+import { ButtonAnchor, ButtonLink, buttonStyles } from "@/components/Button";
 import { Lightbox } from "@/components/Lightbox";
 import { Reveal } from "@/components/Reveal";
 import { RoomCard } from "@/components/RoomCard";
@@ -160,14 +160,13 @@ function RoomDetail() {
                 <p className="mt-1 text-sm text-muted-foreground">per night, placeholder rate</p>
 
                 <div className="mt-7 flex flex-col gap-3">
-                  <ButtonLink
+                  <Link
                     to="/booking"
                     search={{ room: room.slug, guests: room.capacity }}
-                    variant="accent"
-                    size="lg"
+                    className={buttonStyles({ variant: "accent", size: "lg" })}
                   >
                     Request this room
-                  </ButtonLink>
+                  </Link>
                   <ButtonAnchor href={site.phoneHref} variant="outline" size="lg">
                     <Phone className="size-4" aria-hidden="true" />
                     {site.phone}
