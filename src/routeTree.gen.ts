@@ -16,6 +16,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ExperiencesRouteImport } from './routes/experiences'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as JournalIndexRouteImport } from './routes/journal.index'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as RoomsIndexRouteImport } from './routes/rooms.index'
@@ -56,6 +57,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JournalIndexRoute = JournalIndexRouteImport.update({
   id: '/journal/',
   path: '/journal/',
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/experiences': typeof ExperiencesRoute
   '/gallery': typeof GalleryRoute
   '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/rooms/$slug': typeof RoomsSlugRoute
   '/journal/': typeof JournalIndexRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/experiences': typeof ExperiencesRoute
   '/gallery': typeof GalleryRoute
   '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/rooms/$slug': typeof RoomsSlugRoute
   '/journal': typeof JournalIndexRoute
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/experiences': typeof ExperiencesRoute
   '/gallery': typeof GalleryRoute
   '/privacy': typeof PrivacyRoute
+  '/terms': typeof TermsRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/rooms/$slug': typeof RoomsSlugRoute
   '/journal/': typeof JournalIndexRoute
@@ -127,6 +136,7 @@ export interface FileRouteTypes {
     | '/experiences'
     | '/gallery'
     | '/privacy'
+    | '/terms'
     | '/journal/$slug'
     | '/rooms/$slug'
     | '/journal/'
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/experiences'
     | '/gallery'
     | '/privacy'
+    | '/terms'
     | '/journal/$slug'
     | '/rooms/$slug'
     | '/journal'
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/experiences'
     | '/gallery'
     | '/privacy'
+    | '/terms'
     | '/journal/$slug'
     | '/rooms/$slug'
     | '/journal/'
@@ -167,6 +179,7 @@ export interface RootRouteChildren {
   ExperiencesRoute: typeof ExperiencesRoute
   GalleryRoute: typeof GalleryRoute
   PrivacyRoute: typeof PrivacyRoute
+  TermsRoute: typeof TermsRoute
   JournalSlugRoute: typeof JournalSlugRoute
   RoomsSlugRoute: typeof RoomsSlugRoute
   JournalIndexRoute: typeof JournalIndexRoute
@@ -224,6 +237,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/journal/': {
       id: '/journal/'
       path: '/journal'
@@ -263,6 +283,7 @@ const rootRouteChildren: RootRouteChildren = {
   ExperiencesRoute: ExperiencesRoute,
   GalleryRoute: GalleryRoute,
   PrivacyRoute: PrivacyRoute,
+  TermsRoute: TermsRoute,
   JournalSlugRoute: JournalSlugRoute,
   RoomsSlugRoute: RoomsSlugRoute,
   JournalIndexRoute: JournalIndexRoute,

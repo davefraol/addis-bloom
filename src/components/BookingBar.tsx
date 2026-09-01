@@ -29,7 +29,7 @@ export function BookingBar({ className }: { className?: string }) {
       return;
     }
     setError(null);
-    navigate({ to: "/booking", search: { checkIn, checkOut, guests, room: undefined } });
+    navigate({ to: "/booking", search: { checkIn, checkOut, guests } });
   };
 
   return (
